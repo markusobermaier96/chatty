@@ -85,6 +85,8 @@ export const POST: RequestHandler = async ({ request }) => {
 			body: JSON.stringify(chatRequestOpts)
 		})
 
+		console.log(chatResponse.body)
+
 		if (!chatResponse.ok) {
 			const err = await chatResponse.json()
 			throw new Error(err.error.message)

@@ -46,6 +46,7 @@
 				if (delta.content) {
 					answer = (answer ?? '') + delta.content
 				}
+				console.log(completionResponse)
 			} catch (err) {
 				handleError(err)
 			}
@@ -69,15 +70,15 @@
 	</div>
 	<div class="h-[500px] w-full bg-gray-900 rounded-md p-4 overflow-y-auto flex flex-col gap-4">
 		<div class="flex flex-col gap-2">
-			<ChatMessage type="assistant" message="Hello, ask me anything you want!" />
-			{#each chatMessages as message}
-				<ChatMessage type={message.role} message={message.content} />
+			<ChatMessage role="assistant" content="Hello, ask me anything you want!" />
+			{#each chatMessages as { role, content }}
+				<ChatMessage {role} {content} />
 			{/each}
 			{#if answer}
-				<ChatMessage type="assistant" message={answer} />
+				<ChatMessage role="assistant" content={answer} />
 			{/if}
 			{#if loading}
-				<ChatMessage type="assistant" message="Loading.." />
+				<ChatMessage role="assistant" content="Loading.." />
 			{/if}
 		</div>
 		<div class="" bind:this={scrollToDiv} />
